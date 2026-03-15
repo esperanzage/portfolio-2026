@@ -2,13 +2,14 @@ import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Badge from './Badge.jsx'
 import DeviceMockup from './DeviceMockup.jsx'
-import { RebrandingMockup, FeeManagementMockup, CustomFieldsMockup } from './CaseMockups.jsx'
+import { RebrandingMockup, FeeManagementMockup, CustomFieldsMockup, AIPrototypingMockup } from './CaseMockups.jsx'
 import { caseStudies } from '../data/caseStudies.js'
 
 const MOCKUPS = {
   rebranding: RebrandingMockup,
   'fee-management': FeeManagementMockup,
   'custom-fields': CustomFieldsMockup,
+  'ai-prototyping': AIPrototypingMockup,
 }
 
 function FullScreenCard({ cs, index }) {
@@ -33,7 +34,7 @@ function FullScreenCard({ cs, index }) {
       style={{
         position: 'sticky',
         top: 0,
-        height: '100vh',
+        height: '100dvh',
         zIndex: index + 1,
         overflow: 'hidden',
         background: cs.gradient,
@@ -48,6 +49,7 @@ function FullScreenCard({ cs, index }) {
       >
         {/* Main layout */}
         <div
+          className="case-card-layout"
           style={{
             display: 'flex',
             height: '100%',
@@ -55,16 +57,13 @@ function FullScreenCard({ cs, index }) {
             zIndex: 1,
           }}
         >
-          {/* Image half — desktop only */}
+          {/* Image half */}
           <div
-            className="hidden lg:flex"
+            className="case-image-half"
             style={{
-              flex: '0 0 52%',
               position: 'relative',
               overflow: 'hidden',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 'clamp(48px, 6vh, 80px) clamp(48px, 5vw, 80px)',
+              padding: 'clamp(24px, 4vh, 64px) clamp(20px, 3vw, 56px)',
             }}
           >
             {/* Decorative accent circle */}
@@ -82,9 +81,8 @@ function FullScreenCard({ cs, index }) {
             />
 
             <div
+              className="case-mockup-inner"
               style={{
-                width: '100%',
-                maxWidth: 600,
                 transform: hovered ? 'scale(1.02) translateY(-4px)' : 'scale(1) translateY(0)',
                 transition: 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1)',
                 transformOrigin: 'center center',
@@ -111,7 +109,7 @@ function FullScreenCard({ cs, index }) {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              padding: 'clamp(40px, 5vw, 80px) clamp(32px, 5vw, 72px)',
+              padding: 'clamp(20px, 3vw, 80px) clamp(24px, 5vw, 72px)',
               position: 'relative',
             }}
           >
@@ -162,7 +160,7 @@ function FullScreenCard({ cs, index }) {
               }}
             >
               {cs.tags.map(tag => (
-                <Badge key={tag} inProgress={tag === 'In Progress'}>{tag}</Badge>
+                <Badge key={tag} inProgress={tag === 'Coming Soon'}>{tag}</Badge>
               ))}
             </div>
 
@@ -223,18 +221,8 @@ function FullScreenCard({ cs, index }) {
 export default function CaseStudies() {
   return (
     <section id="cases">
-      {/* Section label — sits above the sticky stack */}
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          padding: 'clamp(72px, 8vw, 140px) 32px 48px',
-        }}
-      >
-      </div>
-
       {/* Sticky card stack */}
-      <div style={{ position: 'relative', height: `calc(100vh * ${caseStudies.length})` }}>
+      <div style={{ position: 'relative', height: `calc(100dvh * ${caseStudies.length})` }}>
         {caseStudies.map((cs, i) => (
           <FullScreenCard key={cs.id} cs={cs} index={i} />
         ))}

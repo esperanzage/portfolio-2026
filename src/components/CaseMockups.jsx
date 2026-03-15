@@ -7,6 +7,9 @@ const frame = {
   overflow: 'hidden',
   boxShadow: '0 8px 32px rgba(0,0,0,0.10)',
   width: '100%',
+  height: '60%',
+  display: 'flex',
+  flexDirection: 'column',
 }
 
 const toolbar = {
@@ -48,7 +51,7 @@ export function RebrandingMockup() {
   return (
     <div style={frame}>
       <BrowserChrome />
-      <div style={{ padding: 12, background: '#F5F5F3', display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div style={{ padding: 12, background: '#F5F5F3', display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
         {/* Top row: 4 cards */}
         <div style={{ display: 'grid', gridTemplateColumns: '0.7fr 1fr 1fr 0.8fr', gap: 8 }}>
           {/* Typography */}
@@ -196,7 +199,7 @@ export function FeeManagementMockup() {
   return (
     <div style={frame}>
       <BrowserChrome />
-      <div style={{ padding: '16px 18px 18px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div style={{ padding: '16px 18px 18px', display: 'flex', flexDirection: 'column', gap: 12, flex: 1 }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ fontSize: 13, fontWeight: 700, color: '#1A1A1A' }}>Fees and payment methods</span>
@@ -255,6 +258,109 @@ export function FeeManagementMockup() {
   )
 }
 
+// ── AI Prototyping Tool ────────────────────────────────────────────────────
+
+export function AIPrototypingMockup() {
+  return (
+    <div style={{ ...frame, display: 'flex', flexDirection: 'column' }}>
+      <BrowserChrome />
+      <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+
+        {/* Left: Prompt / chat panel */}
+        <div style={{
+          width: '46%',
+          borderRight: '1px solid rgba(0,0,0,0.07)',
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '12px 12px 10px',
+          gap: 8,
+          background: '#FAFAF8',
+        }}>
+          <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#B08D57' }}>
+            Prompt
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 7, flex: 1 }}>
+            {/* User bubble */}
+            <div style={{ background: '#1A1A1A', borderRadius: '8px 8px 2px 8px', padding: '6px 9px', alignSelf: 'flex-end', maxWidth: '90%' }}>
+              <span style={{ fontSize: 8.5, color: '#fff', lineHeight: 1.5 }}>Property overview card with status badge and quick actions</span>
+            </div>
+
+            {/* AI response */}
+            <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: '2px 8px 8px 8px', padding: '6px 9px', maxWidth: '92%' }}>
+              <span style={{ fontSize: 7.5, color: '#B08D57', display: 'block', marginBottom: 3 }}>✦ Using Vision tokens</span>
+              <span style={{ fontSize: 8.5, color: '#3A3A3A', lineHeight: 1.5 }}>Generated PropertyCard with StatusBadge and ActionGroup...</span>
+            </div>
+
+            {/* User bubble 2 */}
+            <div style={{ background: '#1A1A1A', borderRadius: '8px 8px 2px 8px', padding: '6px 9px', alignSelf: 'flex-end', maxWidth: '90%' }}>
+              <span style={{ fontSize: 8.5, color: '#fff', lineHeight: 1.5 }}>Add tenant info section below</span>
+            </div>
+          </div>
+
+          {/* Input */}
+          <div style={{ height: 27, border: '1px solid rgba(176,141,87,0.28)', borderRadius: 6, background: '#fff', display: 'flex', alignItems: 'center', padding: '0 8px', gap: 6 }}>
+            <span style={{ flex: 1, fontSize: 8, color: '#CCC' }}>Describe a feature or change...</span>
+            <div style={{ width: 17, height: 17, borderRadius: 4, background: '#B08D57', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <span style={{ fontSize: 9, color: '#fff', lineHeight: 1 }}>↑</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Prototype preview */}
+        <div style={{ flex: 1, padding: '12px 12px 10px', background: '#F2EEE8', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#999' }}>
+            Preview
+          </div>
+
+          {/* Rendered card */}
+          <div style={{ background: '#fff', borderRadius: 8, border: '1px solid rgba(0,0,0,0.07)', padding: '11px 11px', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 7 }}>
+              <div>
+                <div style={{ fontSize: 10.5, fontWeight: 700, color: '#1A1A1A', marginBottom: 2 }}>12 Oak Street</div>
+                <div style={{ fontSize: 8.5, color: '#888' }}>3-bed residential</div>
+              </div>
+              <span style={{ fontSize: 7.5, fontWeight: 600, color: '#2A7A50', background: '#E6F4EE', borderRadius: 20, padding: '3px 8px' }}>Active</span>
+            </div>
+
+            <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '7px 0' }} />
+
+            {[
+              { label: 'Tenant', value: 'J. Martinez' },
+              { label: 'Lease ends', value: 'Dec 2025' },
+              { label: 'Rent', value: '$2,400/mo' },
+            ].map(({ label, value }) => (
+              <div key={label} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5 }}>
+                <span style={{ fontSize: 8.5, color: '#888' }}>{label}</span>
+                <span style={{ fontSize: 8.5, fontWeight: 600, color: '#1A1A1A' }}>{value}</span>
+              </div>
+            ))}
+
+            <div style={{ display: 'flex', gap: 6, marginTop: 9 }}>
+              <div style={{ flex: 1, height: 22, background: '#1A1A1A', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: 8, color: '#fff', fontWeight: 600 }}>View details</span>
+              </div>
+              <div style={{ width: 22, height: 22, border: '1px solid rgba(0,0,0,0.12)', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: 11, color: '#888', lineHeight: 1 }}>⋯</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Token chips */}
+          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+            {['color.primary', 'space.md', 'radius.sm', 'type.label'].map(t => (
+              <span key={t} style={{ fontSize: 6.5, color: '#B08D57', background: 'rgba(176,141,87,0.08)', border: '1px solid rgba(176,141,87,0.15)', borderRadius: 3, padding: '2px 5px', fontFamily: 'monospace' }}>
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
 // ── Custom Fields ──────────────────────────────────────────────────────────
 
 export function CustomFieldsMockup() {
@@ -268,7 +374,7 @@ export function CustomFieldsMockup() {
   return (
     <div style={{ ...frame, position: 'relative' }}>
       <BrowserChrome />
-      <div style={{ padding: '16px 18px 18px', display: 'flex', flexDirection: 'column', gap: 13 }}>
+      <div style={{ padding: '16px 18px 18px', display: 'flex', flexDirection: 'column', gap: 13, flex: 1 }}>
         {/* Field name */}
         <div>
           <span style={{ fontSize: 11, fontWeight: 700, color: '#1A1A1A', display: 'block', marginBottom: 6 }}>Field name</span>

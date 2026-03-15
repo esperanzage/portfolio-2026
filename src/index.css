@@ -3,6 +3,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Design tokens ── */
+:root {
+  --c-bg:           #FAFAF8;
+  --c-warm:         #F5EDE0;
+  --c-mid:          #F0E8DC;
+  --c-accent:       #B08D57;
+  --c-accent-dk:    #7A5C2E;
+  --c-text:         #1A1A1A;
+  --c-body:         #3A3A3A;
+  --c-muted:        #666666;
+  --c-border:       #E5E0D8;
+  --c-border-light: #D4C9B8;
+  --grad-hero:      linear-gradient(180deg, #FAFAF8 0%, #F0E8DC 100%);
+  --grad-section:   linear-gradient(180deg, #FAFAF8 0%, #F0E8DC 50%, #FAFAF8 100%);
+  --grad-warm:      linear-gradient(180deg, #FAFAF8 0%, #F5EDE0 60%, #FAFAF8 100%);
+  --grad-img:       linear-gradient(160deg, #F5F1EC 0%, #EAE4DA 100%);
+}
+
 /* ── Base ── */
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -216,4 +234,37 @@ body {
 .dot-grid {
   background-image: radial-gradient(circle, rgba(176,141,87,0.15) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
+}
+
+/* ── Case study card layout ── */
+.case-card-layout {
+  flex-direction: column;
+}
+@media (min-width: 1024px) {
+  .case-card-layout { flex-direction: row; }
+}
+
+.case-image-half {
+  flex: 0 0 42%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+@media (min-width: 1024px) {
+  .case-image-half { flex: 0 0 50%; }
+}
+
+.case-mockup-inner {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 1024px) {
+  .case-mockup-inner {
+    max-width: 780px;
+    height: 65dvh;
+  }
 }

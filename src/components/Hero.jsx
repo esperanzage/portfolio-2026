@@ -25,7 +25,7 @@ export default function Hero() {
     <section
       id="hero"
       style={{
-        height: '100vh',
+        height: '100dvh',
         display: 'flex',
         alignItems: 'center',
         position: 'sticky',
@@ -44,14 +44,14 @@ export default function Hero() {
         }}
       >
         <GrainGradient
-          speed={1}
+          speed={1.1}
           scale={2.59}
           rotation={0}
           offsetX={0}
           offsetY={0}
           softness={1}
           intensity={0.53}
-          noise={0.3}
+          noise={0}
           shape="wave"
           colors={['#AD9877', '#D4C9B8', '#D8CCC7']}
           colorBack="#00000000"
@@ -87,7 +87,7 @@ export default function Hero() {
         style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: '80px 32px 0',
+          padding: '96px 32px 0',
           width: '100%',
           position: 'relative',
           zIndex: 1,
@@ -97,15 +97,15 @@ export default function Hero() {
           <p
             style={{
               fontSize: 18,
-              fontWeight: 400,
-              color: '#666666',
+              fontWeight: 500,
+              color: '#7A5C2E',
               margin: '0 0 24px',
               opacity: wordVisible.length > 0 ? 1 : 0,
               transform: wordVisible.length > 0 ? 'translateY(0)' : 'translateY(10px)',
               transition: 'opacity 0.5s ease 100ms, transform 0.5s ease 100ms',
             }}
           >
-            Hi there, I'm Espe 👋
+            Hi, I'm Esperanza 👋
           </p>
 
           <h1

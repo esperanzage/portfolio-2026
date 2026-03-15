@@ -1,5 +1,6 @@
 import EyebrowLabel from './EyebrowLabel.jsx'
 import FadeIn from './FadeIn.jsx'
+import Badge from './Badge.jsx'
 
 export default function About() {
   return (
@@ -114,35 +115,13 @@ export default function About() {
                 {[
                   'Design Systems', 'UI/UX', 'Prototyping', 'Design Tokens',
                   'Design Ops', 'User Research', 'Synthesis', 'Strategy',
-                  'Figma', 'Claude Code', 'React', 'Roadmapping',
-                  'B2B SaaS', 'Stakeholders',
+                  'Figma', 'Claude Code', 'React', 'Vue', 'Roadmapping',
+                  'B2B SaaS'
                 ].map(tag => (
-                  <span
-                    key={tag}
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 500,
-                      color: '#3A3A3A',
-                      background: 'rgba(250,248,245,0.65)',
-                      border: '1px solid rgba(176,141,87,0.18)',
-                      borderRadius: 40,
-                      padding: '7px 18px',
-                      backdropFilter: 'blur(6px)',
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    {tag}
-                  </span>
+                  <Badge key={tag}>{tag}</Badge>
                 ))}
               </div>
 
-              {/* Years callout */}
-              <div style={{ position: 'relative', display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 20, paddingLeft: 4 }}>
-                <span style={{ fontSize: 52, fontWeight: 700, color: '#B08D57', letterSpacing: '-0.04em', lineHeight: 1 }}>
-                  ~10
-                </span>
-                <span style={{ fontSize: 13, color: '#999', fontWeight: 400 }}>years experience</span>
-              </div>
             </div>
           </FadeIn>
         </div>

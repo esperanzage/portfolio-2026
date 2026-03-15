@@ -12,14 +12,14 @@ function SingleMetric({ value, suffix, label }) {
       </div>
       <div
         style={{
-          fontSize: 13,
+          fontSize: 12,
           fontWeight: 600,
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
           color: '#666666',
-          marginTop: 8,
-          maxWidth: 160,
+          maxWidth: 240,
           margin: '8px auto 0',
+          lineHeight: 1.5,
         }}
       >
         {label}

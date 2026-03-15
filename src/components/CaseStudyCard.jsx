@@ -25,7 +25,7 @@ export default function CaseStudyCard({ cs, index }) {
             transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
             transition: 'transform 400ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1)',
             display: 'flex',
-            flexDirection: isEven ? undefined : 'column',
+            flexDirection: 'column',
           }}
           className={isEven ? 'lg:flex-row' : 'flex-col'}
         >
@@ -38,7 +38,7 @@ export default function CaseStudyCard({ cs, index }) {
               flex: isEven ? '0 0 50%' : undefined,
               background: `linear-gradient(135deg, ${cs.tintFrom} 0%, ${cs.tintTo} 100%)`,
             }}
-            className={isEven ? 'lg:min-h-[380px]' : 'min-h-[240px] md:min-h-[320px]'}
+            className={isEven ? 'min-h-[240px] md:min-h-[300px] lg:min-h-[380px]' : 'min-h-[240px] md:min-h-[320px]'}
           >
             <div
               style={{
@@ -123,7 +123,7 @@ export default function CaseStudyCard({ cs, index }) {
             {/* Tags */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 24 }}>
               {cs.tags.map(tag => (
-                <Badge key={tag} inProgress={tag === 'In Progress'}>
+                <Badge key={tag} inProgress={tag === 'Coming Soon'}>
                   {tag}
                 </Badge>
               ))}

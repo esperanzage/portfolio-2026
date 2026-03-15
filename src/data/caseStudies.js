@@ -165,7 +165,7 @@ export const caseStudies = [
     metrics: [
       { value: 100, suffix: '+', label: 'Customers using custom fields' },
       { value: 1500, suffix: '+', label: 'Field definitions created in first 6 months' },
-      { value: 3, suffix: 'phases', label: 'Phased rollout with zero disruption' },
+      { value: 3, suffix: '', label: 'Phases, zero disruption' },
     ],
     problem: {
       intro: 'Property management companies manage diverse portfolios with unique data needs — property types, business records, regulatory details. The existing platform couldn\'t accommodate this variety, forcing customers into external spreadsheets.',
@@ -228,7 +228,7 @@ export const caseStudies = [
     timeline: 'In Progress',
     team: '1 designer, 1 engineer',
     // TODO: Update team details as the project evolves
-    tags: ['Lead Designer', 'AI Tooling', 'In Progress'],
+    tags: ['Lead Designer', 'AI Tooling', 'Coming Soon'],
     inProgress: true,
     tintFrom: '#F0E8E0',
     tintTo: '#E5D5C5',
