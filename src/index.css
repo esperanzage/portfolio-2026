@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #FAFAF8;
+  color: #1A1A1A;
+  font-family: 'Rethink Sans', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #B08D57;
+  color: white;
+  padding: 8px 16px;
+  z-index: 1000;
+  border-radius: 0 0 8px 0;
+  font-size: 14px;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F5EDE0; }
+::-webkit-scrollbar-thumb { background: #D4C9B8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #B08D57; }
+
+/* ── Text selection ── */
+::selection { background: rgba(176, 141, 87, 0.2); color: #1A1A1A; }
+
+/* ── Focus states ── */
+:focus-visible {
+  outline: 2px solid #B08D57;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Custom bullets ── */
+.custom-bullets li {
+  position: relative;
+  padding-left: 24px;
+  list-style: none;
+}
+.custom-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #B08D57;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* ── Underline link hover animation ── */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #B08D57;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.link-underline:hover::after { width: 100%; }
+.link-underline:hover { color: #B08D57; }
+
+/* ── Nav link underline from center ── */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #666666;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background: #B08D57;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(0);
+}
+.nav-link:hover { color: #B08D57; }
+.nav-link:hover::after { width: 100%; left: 0; }
+.nav-link.active { color: #B08D57; }
+.nav-link.active::after { width: 100%; left: 0; }
+
+/* ── Fade-in animations ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Hero word animation ── */
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero-word.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Page transition ── */
+.page-enter {
+  animation: pageEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Pulsing dot ── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+/* ── Contact button fill ── */
+.contact-btn {
+  border: 1.5px solid #B08D57;
+  background: transparent;
+  color: #B08D57;
+  border-radius: 24px;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  text-decoration: none;
+  display: inline-block;
+}
+.contact-btn:hover {
+  background: #B08D57;
+  color: #FFFFFF;
+}
+
+/* ── Accordion ── */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.accordion-content.open {
+  max-height: 400px;
+}
+
+/* ── Process keyword dots ── */
+.process-keywords span {
+  color: #666666;
+  font-size: 14px;
+}
+
+/* ── Device mockup ── */
+.device-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.device-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+}
+
+/* ── Metric band ── */
+.metric-number {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  color: #B08D57;
+}
+
+/* ── Hero dot grid ── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(176,141,87,0.15) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
