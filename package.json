@@ -1,1 +1,28 @@
-{"name":"portfolio-2026","private":true,"version":"0.0.0","type":"module","scripts":{"dev":"vite","build":"vite build","preview":"vite preview"},"dependencies":{"@paper-design/shaders-react":"^0.0.71","iconoir-react":"^7.11.0","react":"^18.3.1","react-dom":"^18.3.1","react-router-dom":"^6.28.0"},"devDependencies":{"@types/react":"^18.3.1","@types/react-dom":"^18.3.1","@vitejs/plugin-react":"^4.3.4","autoprefixer":"^10.4.21","postcss":"^8.5.3","tailwindcss":"^3.4.17","vite":"^6.2.2"}}
+{
+    "name": "portfolio-2026",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "ci": "echo 'No CI implemented yet, skipping.' && exit 0",
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@paper-design/shaders-react": "^0.0.71",
+        "iconoir-react": "^7.11.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-router-dom": "^6.28.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.3.1",
+        "@types/react-dom": "^18.3.1",
+        "@vitejs/plugin-react": "^4.3.4",
+        "autoprefixer": "^10.4.21",
+        "postcss": "^8.5.3",
+        "tailwindcss": "^3.4.17",
+        "vite": "^6.2.2"
+    }
+}
