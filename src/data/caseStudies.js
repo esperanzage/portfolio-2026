@@ -1,3 +1,5 @@
+const BASE = import.meta.env.BASE_URL
+
 export const caseStudies = [
   {
     id: 'rebranding',
@@ -10,8 +12,8 @@ export const caseStudies = [
     team: '1 designer, 3 engineers, 1 PM',
     // TODO: add full team details
     tags: ['Lead Designer', 'Product Manager', 'Design System'],
-    heroImage: '/Component%20rebrand.png',
-    images: ['/loginRebrand.png', '/loginRebrand-1.png', '/loginRebrand-2.png', '/mobileAppRebrand.png'],
+    heroImage: `${BASE}Component%20rebrand.png`,
+    images: [`${BASE}loginRebrand.png`, `${BASE}loginRebrand-1.png`, `${BASE}loginRebrand-2.png`, `${BASE}mobileAppRebrand.png`],
     tintFrom: '#F5EDE0',
     tintTo: '#EAE0D0',
     gradient: 'radial-gradient(ellipse 100% 80% at 10% 100%, #E6DDCE 0%, #EEE8DC 45%, #F8F4EE 100%)',
@@ -87,8 +89,8 @@ export const caseStudies = [
     timeline: '~3 months',
     team: '1 designer, 3 engineers, 1 PM',
     tags: ['Lead Designer', 'Product Manager'],
-    heroImage: '/feesAndPaymentMethods.png',
-    images: ['/feesAndPaymentMethods-list.png'],
+    heroImage: `${BASE}feesAndPaymentMethods.png`,
+    images: [`${BASE}feesAndPaymentMethods-list.png`],
     tintFrom: '#F2E5CE',
     tintTo: '#E8D4B4',
     gradient: 'radial-gradient(ellipse 100% 80% at 90% 0%, #E3D8C6 0%, #EDE5D6 40%, #F5F0E6 100%)',
@@ -156,8 +158,8 @@ export const caseStudies = [
     timeline: '~4 months',
     team: '1 designer, 2 engineers, 1 PM',
     tags: ['Lead Designer', 'Product Manager'],
-    heroImage: '/customFields.png',
-    images: ['/customFieldsList.png', '/customFields-importValues.png'],
+    heroImage: `${BASE}customFields.png`,
+    images: [`${BASE}customFieldsList.png`, `${BASE}customFields-importValues.png`],
     tintFrom: '#EDE0CC',
     tintTo: '#E2D0B5',
     gradient: 'radial-gradient(ellipse 110% 90% at 50% 110%, #DDD4C0 0%, #E8DFCE 45%, #F2ECE2 100%)',
