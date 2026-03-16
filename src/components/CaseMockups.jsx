@@ -283,18 +283,18 @@ export function AIPrototypingMockup() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7, flex: 1 }}>
             {/* User bubble */}
             <div style={{ background: '#1A1A1A', borderRadius: '8px 8px 2px 8px', padding: '6px 9px', alignSelf: 'flex-end', maxWidth: '90%' }}>
-              <span style={{ fontSize: 8.5, color: '#fff', lineHeight: 1.5 }}>Property overview card with status badge and quick actions</span>
+              <span style={{ fontSize: 8.5, color: '#fff', lineHeight: 1.5 }}>Survey builder with question types and progress indicator</span>
             </div>
 
             {/* AI response */}
             <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.07)', borderRadius: '2px 8px 8px 8px', padding: '6px 9px', maxWidth: '92%' }}>
               <span style={{ fontSize: 7.5, color: '#B08D57', display: 'block', marginBottom: 3 }}>✦ Using Vision tokens</span>
-              <span style={{ fontSize: 8.5, color: '#3A3A3A', lineHeight: 1.5 }}>Generated PropertyCard with StatusBadge and ActionGroup...</span>
+              <span style={{ fontSize: 8.5, color: '#3A3A3A', lineHeight: 1.5 }}>Generated SurveyCard with QuestionBlock and ProgressBar...</span>
             </div>
 
             {/* User bubble 2 */}
             <div style={{ background: '#1A1A1A', borderRadius: '8px 8px 2px 8px', padding: '6px 9px', alignSelf: 'flex-end', maxWidth: '90%' }}>
-              <span style={{ fontSize: 8.5, color: '#fff', lineHeight: 1.5 }}>Add tenant info section below</span>
+              <span style={{ fontSize: 8.5, color: '#fff', lineHeight: 1.5 }}>Add a scale question with labels below</span>
             </div>
           </div>
 
@@ -315,20 +315,23 @@ export function AIPrototypingMockup() {
 
           {/* Rendered card */}
           <div style={{ background: '#fff', borderRadius: 8, border: '1px solid rgba(0,0,0,0.07)', padding: '11px 11px', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', flex: 1 }}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 7 }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 6 }}>
               <div>
-                <div style={{ fontSize: 10.5, fontWeight: 700, color: '#1A1A1A', marginBottom: 2 }}>12 Oak Street</div>
-                <div style={{ fontSize: 8.5, color: '#888' }}>3-bed residential</div>
+                <div style={{ fontSize: 10.5, fontWeight: 700, color: '#1A1A1A', marginBottom: 2 }}>Q3 Engagement Survey</div>
+                <div style={{ fontSize: 8.5, color: '#888' }}>Annual pulse · 8 questions</div>
               </div>
-              <span style={{ fontSize: 7.5, fontWeight: 600, color: '#2A7A50', background: '#E6F4EE', borderRadius: 20, padding: '3px 8px' }}>Active</span>
+              <span style={{ fontSize: 7.5, fontWeight: 600, color: '#2A7A50', background: '#E6F4EE', borderRadius: 20, padding: '3px 8px' }}>Draft</span>
             </div>
 
-            <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', margin: '7px 0' }} />
+            {/* Progress bar */}
+            <div style={{ height: 4, background: 'rgba(0,0,0,0.06)', borderRadius: 2, marginBottom: 8, overflow: 'hidden' }}>
+              <div style={{ width: '62%', height: '100%', background: '#B08D57', borderRadius: 2 }} />
+            </div>
 
             {[
-              { label: 'Tenant', value: 'J. Martinez' },
-              { label: 'Lease ends', value: 'Dec 2025' },
-              { label: 'Rent', value: '$2,400/mo' },
+              { label: 'Audience', value: 'All employees' },
+              { label: 'Questions', value: '5 of 8 done' },
+              { label: 'Launch date', value: 'Apr 1, 2026' },
             ].map(({ label, value }) => (
               <div key={label} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5 }}>
                 <span style={{ fontSize: 8.5, color: '#888' }}>{label}</span>
@@ -338,7 +341,7 @@ export function AIPrototypingMockup() {
 
             <div style={{ display: 'flex', gap: 6, marginTop: 9 }}>
               <div style={{ flex: 1, height: 22, background: '#1A1A1A', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontSize: 8, color: '#fff', fontWeight: 600 }}>View details</span>
+                <span style={{ fontSize: 8, color: '#fff', fontWeight: 600 }}>Continue editing</span>
               </div>
               <div style={{ width: 22, height: 22, border: '1px solid rgba(0,0,0,0.12)', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ fontSize: 11, color: '#888', lineHeight: 1 }}>⋯</span>

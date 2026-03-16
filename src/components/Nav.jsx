@@ -188,13 +188,12 @@ export default function Nav() {
 
       {/* Mobile menu overlay */}
       <div
-        className="md:hidden"
+        className="flex md:hidden"
         style={{
           position: 'fixed',
           inset: 0,
           zIndex: 90,
           background: '#F5EDE0',
-          display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',

@@ -1,14 +1,14 @@
 import { useInView } from '../hooks/useInView.js'
 import { useCountUp } from '../hooks/useCountUp.js'
 
-function SingleMetric({ value, suffix, label }) {
+function SingleMetric({ value, suffix, label, text }) {
   const [ref, inView] = useInView(0.3)
-  const count = useCountUp(value, 1500, inView)
+  const count = useCountUp(text ? 0 : value, 1500, inView)
 
   return (
-    <div ref={ref} style={{ textAlign: 'center', padding: '0 32px' }}>
+    <div ref={ref} style={{ textAlign: 'center', padding: '0 40px' }}>
       <div className="metric-number">
-        {count}{suffix}
+        {text ?? `${count}${suffix}`}
       </div>
       <div
         style={{
@@ -32,16 +32,17 @@ export default function MetricCallout({ metrics }) {
   return (
     <div
       style={{
-        background: 'linear-gradient(180deg, #FAFAF8 0%, #F0E8DC 50%, #FAFAF8 100%)',
-        padding: '80px 0',
+        padding: '0 32px 64px',
         width: '100%',
+        boxSizing: 'border-box',
       }}
     >
       <div
         style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: '0 32px',
+          borderTop: '1px solid rgba(176,141,87,0.2)',
+          paddingTop: 40,
           display: 'flex',
           justifyContent: 'center',
           gap: 0,
