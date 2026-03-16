@@ -233,13 +233,13 @@ export default function CaseStudyPage({ cs }) {
 
         {/* ── 3: Process — full-screen sticky, homepage card style ── */}
         <StickySection zIndex={3} background='radial-gradient(ellipse 120% 100% at 80% 0%, #EDE5D6 0%, #F5EDE0 45%, #F0E8DC 100%)'>
-          <div style={{ ...INNER, padding: 'clamp(56px, 7vw, 96px) 32px' }}>
+          <div style={{ ...INNER, padding: 'clamp(56px, 7vw, 96px) 32px', width: '100%', boxSizing: 'border-box' }}>
             <FadeIn>
               <SectionLabel>Process</SectionLabel>
             </FadeIn>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginTop: 32 }}>
+            <div className="process-cards-slider" style={{ gap: 16, marginTop: 28 }}>
               {cs.process.map((step, i) => (
-                <FadeIn key={i} delay={i * 80}>
+                <FadeIn key={i} delay={i * 80} className="process-card-item">
                   <div style={{
                     background: `linear-gradient(145deg, #FAF8F3 0%, #F3EDE0 100%), ${NOISE_BG}`,
                     backgroundBlendMode: 'multiply',

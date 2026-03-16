@@ -200,6 +200,36 @@ body {
   max-height: 400px;
 }
 
+/* ── Process cards — mobile horizontal slider ── */
+.process-cards-slider {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  min-width: 0;
+  width: 100%;
+}
+.process-cards-slider::-webkit-scrollbar { display: none; }
+.process-card-item {
+  flex-shrink: 0;
+  width: 82vw;
+  max-width: 340px;
+  scroll-snap-align: start;
+}
+@media (min-width: 1024px) {
+  .process-cards-slider {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    overflow-x: visible;
+    overflow-y: visible;
+    scroll-snap-type: none;
+    width: 100%;
+  }
+  .process-card-item { width: auto; }
+}
+
 /* ── Process keyword dots ── */
 .process-keywords span {
   color: #666666;
