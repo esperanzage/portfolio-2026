@@ -12,23 +12,29 @@ export default function Nav() {
   // Close menu on route change
   useEffect(() => { setMenuOpen(false) }, [location.pathname])
 
-  // Track active section on home page
+  // Track active section on home page based on scroll position
   useEffect(() => {
     if (!isHome) return
     const sections = ['cases', 'process', 'about']
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id)
-        })
-      },
-      { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' }
-    )
-    sections.forEach(id => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-    return () => observer.disconnect()
+
+    const handleScroll = () => {
+      if (window.scrollY < 50) {
+        setActiveSection('')
+        return
+      }
+      let current = ''
+      sections.forEach(id => {
+        const el = document.getElementById(id)
+        if (!el) return
+        // Section is "active" once its top has entered the upper half of the viewport
+        if (el.getBoundingClientRect().top <= window.innerHeight * 0.5) current = id
+      })
+      setActiveSection(current)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [isHome])
 
   // Prevent body scroll when mobile menu open

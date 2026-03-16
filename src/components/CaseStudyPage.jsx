@@ -13,7 +13,7 @@ import { getAdjacentCaseStudies } from '../data/caseStudies.js'
 const NOISE_BG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")`
 
 // Full-screen sticky card — same stacking mechanism as the homepage case study cards
-function StickySection({ zIndex, background, children }) {
+function StickySection({ zIndex, background, noShadow, children }) {
   return (
     <div
       style={{
@@ -22,7 +22,7 @@ function StickySection({ zIndex, background, children }) {
         zIndex,
         background,
         borderRadius: '16px 16px 0 0',
-        boxShadow: '0 -2px 24px rgba(0,0,0,0.04)',
+        boxShadow: noShadow ? 'none' : '0 -2px 24px rgba(0,0,0,0.04)',
         minHeight: '100dvh',
         display: 'flex',
         flexDirection: 'column',
@@ -43,7 +43,7 @@ function SectionLabel({ children }) {
   )
 }
 
-function ClickableImage({ src, alt, style = {}, onClick }) {
+function ClickableImage({ src, alt, style = {}, blend = true, onClick }) {
   const [hovered, setHovered] = useState(false)
   return (
     <div
@@ -58,8 +58,9 @@ function ClickableImage({ src, alt, style = {}, onClick }) {
         style={{
           width: '100%',
           display: 'block',
-          transform: hovered ? 'scale(1.005)' : 'scale(1)',
+          transform: hovered ? 'scale(1.005)' : undefined,
           transition: 'transform 400ms cubic-bezier(0.4,0,0.2,1)',
+          mixBlendMode: blend ? 'multiply' : undefined,
           ...style,
         }}
         loading="lazy"
@@ -206,13 +207,13 @@ export default function CaseStudyPage({ cs }) {
               {/* Right: Hero image or mockup */}
               {cs.heroImage ? (
                 <FadeIn delay={120}>
-                  <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 8px 40px rgba(0,0,0,0.12)' }}>
+                  <div style={{ borderRadius: 0, overflow: 'hidden', boxShadow: 'none' }}>
                     <ClickableImage src={cs.heroImage} alt={cs.shortTitle} onClick={setLightbox} />
                   </div>
                 </FadeIn>
               ) : (
                 <FadeIn delay={120}>
-                  <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 4px 32px rgba(0,0,0,0.08)' }}>
+                  <div style={{ borderRadius: 0, overflow: 'hidden', boxShadow: 'none' }}>
                     <DeviceMockup tintFrom={cs.tintFrom} tintTo={cs.tintTo} accentColor={cs.accentColor} isLarge />
                   </div>
                 </FadeIn>
@@ -269,7 +270,7 @@ export default function CaseStudyPage({ cs }) {
               </FadeIn>
               {allImages.length > 0 && (
                 <FadeIn delay={100}>
-                  <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}>
+                  <div style={{ borderRadius: 0, overflow: 'hidden', boxShadow: 'none' }}>
                     <ClickableImage src={allImages[0]} alt={`${cs.shortTitle} — solution`} onClick={setLightbox} />
                   </div>
                 </FadeIn>
@@ -279,7 +280,7 @@ export default function CaseStudyPage({ cs }) {
         </StickySection>
 
         {/* ── 5: Outcome + second image ── */}
-        <StickySection zIndex={5} background='var(--c-bg)'>
+        <StickySection zIndex={5} background='var(--c-bg)' noShadow>
           <div style={{ ...INNER, padding: 'clamp(48px, 6vw, 72px) 32px' }}>
             <div style={{
               display: 'grid',
@@ -289,7 +290,7 @@ export default function CaseStudyPage({ cs }) {
             }}>
               {allImages.length > 1 && (
                 <FadeIn>
-                  <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}>
+                  <div style={{ borderRadius: 0, overflow: 'hidden', boxShadow: 'none' }}>
                     <ClickableImage src={allImages[1]} alt={`${cs.shortTitle} — outcome`} onClick={setLightbox} />
                   </div>
                 </FadeIn>
@@ -336,11 +337,18 @@ export default function CaseStudyPage({ cs }) {
             <div style={{ ...INNER, padding: 'clamp(48px, 6vw, 72px) 32px' }}>
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: allImages.length > 2 ? '1.4fr 1fr' : '1fr',
+                gridTemplateColumns: (cs.outcome2.image || allImages.length > 2) ? '1.8fr 1fr' : '1fr',
                 gap: 'clamp(32px, 5vw, 72px)',
                 alignItems: 'start',
               }}>
-                <FadeIn>
+                {(cs.outcome2.image || allImages[2]) && (
+                  <FadeIn>
+                    <div style={{ borderRadius: 0, overflow: 'hidden', boxShadow: 'none' }}>
+                      <ClickableImage src={cs.outcome2.image || allImages[2]} alt={`${cs.shortTitle} — outcome 2`} onClick={setLightbox} />
+                    </div>
+                  </FadeIn>
+                )}
+                <FadeIn delay={100}>
                   <div>
                     <SectionLabel>Outcome</SectionLabel>
                     <p style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.5, color: 'var(--c-text)', margin: cs.outcome2.body ? '0 0 16px' : '0 0 36px' }}>
@@ -372,13 +380,6 @@ export default function CaseStudyPage({ cs }) {
                     </div>
                   </div>
                 </FadeIn>
-                {allImages.length > 2 && (
-                  <FadeIn delay={100}>
-                    <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}>
-                      <ClickableImage src={allImages[2]} alt={`${cs.shortTitle} — outcome 2`} onClick={setLightbox} />
-                    </div>
-                  </FadeIn>
-                )}
               </div>
             </div>
           </StickySection>
@@ -391,7 +392,7 @@ export default function CaseStudyPage({ cs }) {
               <div style={{ display: 'grid', gridTemplateColumns: `repeat(${allImages.slice(cs.outcome2 ? 3 : 2).length}, 1fr)`, gap: 24 }}>
                 {allImages.slice(cs.outcome2 ? 3 : 2).map((img, i) => (
                   <FadeIn key={i} delay={i * 80}>
-                    <div style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}>
+                    <div style={{ borderRadius: 0, overflow: 'hidden', boxShadow: 'none' }}>
                       <ClickableImage src={img} alt={`${cs.shortTitle} — detail ${i + 1}`} onClick={setLightbox} />
                     </div>
                   </FadeIn>
