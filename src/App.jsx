@@ -4,7 +4,6 @@ import Home from './pages/Home.jsx'
 import Rebranding from './pages/Rebranding.jsx'
 import FeeManagement from './pages/FeeManagement.jsx'
 import CustomFields from './pages/CustomFields.jsx'
-import AIPrototyping from './pages/AIPrototyping.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -21,7 +20,6 @@ export default function App() {
         <Route path="/case-study/rebranding" element={<Rebranding />} />
         <Route path="/case-study/fee-management" element={<FeeManagement />} />
         <Route path="/case-study/custom-fields" element={<CustomFields />} />
-        <Route path="/case-study/ai-prototyping" element={<AIPrototyping />} />
       </Routes>
     </BrowserRouter>
   )

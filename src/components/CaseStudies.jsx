@@ -165,38 +165,55 @@ function FullScreenCard({ cs, index }) {
               transition: 'opacity 0.5s cubic-bezier(0.4,0,0.2,1) 360ms, transform 0.5s cubic-bezier(0.4,0,0.2,1) 360ms',
             }}
           >
-            <Link
-              to={`/case-study/${cs.slug}`}
-              style={{ textDecoration: 'none' }}
-              onMouseEnter={() => setHovered(true)}
-              onMouseLeave={() => setHovered(false)}
-            >
+            {cs.inProgress ? (
               <span
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 8,
-                  fontSize: 15,
+                  fontSize: 13,
                   fontWeight: 600,
-                  color: '#B08D57',
-                  letterSpacing: '0.01em',
-                  borderBottom: hovered ? '1.5px solid #B08D57' : '1.5px solid transparent',
-                  paddingBottom: 2,
-                  transition: 'border-color 0.25s',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: 'var(--c-muted)',
                 }}
               >
-                View case study
+                Coming soon
+              </span>
+            ) : (
+              <Link
+                to={`/case-study/${cs.slug}`}
+                style={{ textDecoration: 'none' }}
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+              >
                 <span
                   style={{
-                    display: 'inline-block',
-                    transform: hovered ? 'translateX(5px)' : 'translateX(0)',
-                    transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    fontSize: 15,
+                    fontWeight: 600,
+                    color: '#B08D57',
+                    letterSpacing: '0.01em',
+                    borderBottom: hovered ? '1.5px solid #B08D57' : '1.5px solid transparent',
+                    paddingBottom: 2,
+                    transition: 'border-color 0.25s',
                   }}
                 >
-                  →
+                  View case study
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      transform: hovered ? 'translateX(5px)' : 'translateX(0)',
+                      transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
+                    }}
+                  >
+                    →
+                  </span>
                 </span>
-              </span>
-            </Link>
+              </Link>
+            )}
           </div>
 
         </div>
