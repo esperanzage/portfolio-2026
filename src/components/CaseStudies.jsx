@@ -97,11 +97,11 @@ function FullScreenCard({ cs, index }) {
 
         {/* Text half */}
         <div
+          className="case-text-half"
           style={{
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
             padding: 'clamp(20px, 3vw, 80px) clamp(24px, 5vw, 72px)',
             position: 'relative',
           }}

@@ -6,13 +6,13 @@ function SingleMetric({ value, suffix, label, text }) {
   const count = useCountUp(text ? 0 : value, 1500, inView)
 
   return (
-    <div ref={ref} style={{ textAlign: 'center', padding: '0 40px' }}>
+    <div ref={ref} style={{ textAlign: 'center', padding: '0 clamp(16px, 5vw, 40px)' }}>
       <div className="metric-number">
         {text ?? `${count}${suffix}`}
       </div>
       <div
         style={{
-          fontSize: 12,
+          fontSize: 'clamp(10px, 2vw, 12px)',
           fontWeight: 600,
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
@@ -50,10 +50,11 @@ export default function MetricCallout({ metrics }) {
         }}
       >
         {metrics.map((m, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'stretch' }}>
+          <div key={i} className="metric-group" style={{ display: 'flex', alignItems: 'stretch' }}>
             <SingleMetric {...m} />
             {i < metrics.length - 1 && (
               <div
+                className="metric-divider"
                 style={{
                   width: 1,
                   background: '#D4C9B8',

@@ -13,7 +13,7 @@ import { getAdjacentCaseStudies } from '../data/caseStudies.js'
 const NOISE_BG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")`
 
 // Full-screen sticky card — same stacking mechanism as the homepage case study cards
-function StickySection({ zIndex, background, noShadow, children }) {
+function StickySection({ zIndex, background, noShadow, flat, children }) {
   return (
     <div
       style={{
@@ -21,7 +21,7 @@ function StickySection({ zIndex, background, noShadow, children }) {
         top: 0,
         zIndex,
         background,
-        borderRadius: '16px 16px 0 0',
+        borderRadius: flat ? 0 : '16px 16px 0 0',
         boxShadow: noShadow ? 'none' : '0 -2px 24px rgba(0,0,0,0.04)',
         minHeight: '100dvh',
         display: 'flex',
@@ -88,7 +88,7 @@ function ClickableImage({ src, alt, style = {}, blend = true, onClick }) {
   )
 }
 
-const INNER = { maxWidth: 1200, margin: '0 auto', padding: '0 32px' }
+const INNER = { maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px, 4vw, 32px)' }
 
 export default function CaseStudyPage({ cs }) {
   const { prev, next } = getAdjacentCaseStudies(cs.id)
@@ -109,6 +109,8 @@ export default function CaseStudyPage({ cs }) {
 
   // Exclude heroImage from gallery — it's shown in the hero+problem section already
   const allImages = (cs.images || []).filter(Boolean)
+  const extraImages = allImages.slice(cs.outcome2 ? 3 : 2)
+  const hasGallery = extraImages.length > 0
 
   return (
     <div style={{ background: 'var(--c-bg)', minHeight: '100vh' }} className="page-enter">
@@ -118,18 +120,22 @@ export default function CaseStudyPage({ cs }) {
       {lightbox && createPortal(
         <div
           style={{
-            position: 'fixed', inset: 0, zIndex: 9999,
+            position: 'fixed',
+            top: 0, left: 0, right: 0, bottom: 0,
+            width: '100vw', height: '100dvh',
+            zIndex: 9999,
             background: 'rgba(0,0,0,0.88)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'zoom-out',
             backdropFilter: 'blur(6px)',
+            WebkitBackdropFilter: 'blur(6px)',
           }}
           onClick={() => setLightbox(null)}
         >
           <img
             src={lightbox}
             alt=""
-            style={{ maxWidth: '92vw', maxHeight: '90vh', borderRadius: 10, boxShadow: '0 32px 80px rgba(0,0,0,0.5)', display: 'block' }}
+            style={{ maxWidth: '90vw', maxHeight: '80dvh', borderRadius: 10, boxShadow: '0 32px 80px rgba(0,0,0,0.5)', display: 'block', objectFit: 'contain' }}
           />
           <button
             onClick={() => setLightbox(null)}
@@ -163,9 +169,9 @@ export default function CaseStudyPage({ cs }) {
               <p style={{ fontSize: 20, lineHeight: 1.65, color: 'var(--c-body)', maxWidth: 700, margin: '0 0 40px' }}>
                 {cs.subtitle}
               </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0, borderTop: '1px solid var(--c-border)', borderBottom: '1px solid var(--c-border)', padding: '20px 0' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', rowGap: 12, columnGap: 0, borderTop: '1px solid var(--c-border)', borderBottom: '1px solid var(--c-border)', padding: '16px 0' }}>
                 {[{ label: 'ROLE', value: cs.role }, { label: 'TIMELINE', value: cs.timeline }, { label: 'TEAM', value: cs.team }].map((meta, i, arr) => (
-                  <div key={meta.label} style={{ paddingRight: 32, marginRight: 32, borderRight: i < arr.length - 1 ? '1px solid var(--c-border)' : 'none' }}>
+                  <div key={meta.label} className={meta.label === 'TEAM' ? 'meta-team' : undefined} style={{ paddingRight: 20, marginRight: 20, borderRight: i < arr.length - 1 ? '1px solid var(--c-border)' : 'none' }}>
                     <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--c-muted)', marginBottom: 4 }}>{meta.label}</div>
                     <div style={{ fontSize: 15, color: 'var(--c-text)' }}>{meta.value}</div>
                   </div>
@@ -181,12 +187,14 @@ export default function CaseStudyPage({ cs }) {
         {/* ── 2: Hero image + Problem — merged, full-screen sticky ── */}
         <StickySection zIndex={2} background={cs.gradient || 'var(--c-bg)'}>
           <div style={{ ...INNER, padding: 'clamp(48px, 6vw, 72px) 32px' }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: cs.heroImage ? '1fr 1.75fr' : '1fr',
-              gap: 'clamp(56px, 7vw, 104px)',
-              alignItems: 'center',
-            }}>
+            <div
+              className={cs.heroImage ? 'md:grid-cols-[1fr_1.75fr]' : undefined}
+              style={{
+                display: 'grid',
+                gap: 'clamp(32px, 5vw, 56px)',
+                alignItems: 'center',
+              }}
+            >
               {/* Left: Problem */}
               <div>
                 <FadeIn>
@@ -256,12 +264,14 @@ export default function CaseStudyPage({ cs }) {
         {/* ── 4: Solution + first image ── */}
         <StickySection zIndex={4} background='var(--c-bg)'>
           <div style={{ ...INNER, padding: 'clamp(48px, 6vw, 72px) 32px' }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: allImages.length > 0 ? '1fr 1.4fr' : '1fr',
-              gap: 'clamp(32px, 5vw, 72px)',
-              alignItems: 'center',
-            }}>
+            <div
+              className={allImages.length > 0 ? 'md:grid-cols-[1fr_1.4fr]' : undefined}
+              style={{
+                display: 'grid',
+                gap: 'clamp(32px, 5vw, 72px)',
+                alignItems: 'center',
+              }}
+            >
               <FadeIn>
                 <SectionLabel>The Solution</SectionLabel>
                 <p style={{ fontSize: 17, lineHeight: 1.75, color: 'var(--c-body)', margin: 0 }}>
@@ -280,22 +290,24 @@ export default function CaseStudyPage({ cs }) {
         </StickySection>
 
         {/* ── 5: Outcome + second image ── */}
-        <StickySection zIndex={5} background='var(--c-bg)' noShadow>
+        <StickySection zIndex={5} background='var(--c-warm)' noShadow flat={!cs.outcome2 && !hasGallery}>
           <div style={{ ...INNER, padding: 'clamp(48px, 6vw, 72px) 32px' }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: allImages.length > 1 ? '1.8fr 1fr' : '1fr',
-              gap: 'clamp(32px, 5vw, 72px)',
-              alignItems: 'start',
-            }}>
+            <div
+              className={allImages.length > 1 ? 'md:grid-cols-[1.8fr_1fr]' : undefined}
+              style={{
+                display: 'grid',
+                gap: 'clamp(32px, 5vw, 72px)',
+                alignItems: 'start',
+              }}
+            >
               {allImages.length > 1 && (
-                <FadeIn>
+                <FadeIn className="order-2 md:order-1">
                   <div style={{ borderRadius: 0, overflow: 'hidden', boxShadow: 'none' }}>
                     <ClickableImage src={allImages[1]} alt={`${cs.shortTitle} — outcome`} onClick={setLightbox} />
                   </div>
                 </FadeIn>
               )}
-              <FadeIn delay={allImages.length > 1 ? 100 : 0}>
+              <FadeIn delay={allImages.length > 1 ? 100 : 0} className="order-1 md:order-2">
                 <div>
                   <SectionLabel>Outcome</SectionLabel>
                   <p style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.5, color: 'var(--c-text)', margin: cs.outcome.body ? '0 0 16px' : '0 0 36px' }}>
@@ -333,22 +345,24 @@ export default function CaseStudyPage({ cs }) {
 
         {/* ── 6: Outcome Part 2 — optional second outcome section ── */}
         {cs.outcome2 && (
-          <StickySection zIndex={6} background='var(--c-bg)'>
+          <StickySection zIndex={6} background='var(--c-bg)' flat={!hasGallery}>
             <div style={{ ...INNER, padding: 'clamp(48px, 6vw, 72px) 32px' }}>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: (cs.outcome2.image || allImages.length > 2) ? '1.8fr 1fr' : '1fr',
-                gap: 'clamp(32px, 5vw, 72px)',
-                alignItems: 'start',
-              }}>
+              <div
+                className={(cs.outcome2.image || allImages.length > 2) ? 'md:grid-cols-[1.8fr_1fr]' : undefined}
+                style={{
+                  display: 'grid',
+                  gap: 'clamp(32px, 5vw, 72px)',
+                  alignItems: 'start',
+                }}
+              >
                 {(cs.outcome2.image || allImages[2]) && (
-                  <FadeIn>
+                  <FadeIn className="order-2 md:order-1">
                     <div style={{ borderRadius: 0, overflow: 'hidden', boxShadow: 'none' }}>
                       <ClickableImage src={cs.outcome2.image || allImages[2]} alt={`${cs.shortTitle} — outcome 2`} onClick={setLightbox} />
                     </div>
                   </FadeIn>
                 )}
-                <FadeIn delay={100}>
+                <FadeIn delay={100} className="order-1 md:order-2">
                   <div>
                     <SectionLabel>Outcome</SectionLabel>
                     <p style={{ fontSize: 20, fontWeight: 600, lineHeight: 1.5, color: 'var(--c-text)', margin: cs.outcome2.body ? '0 0 16px' : '0 0 36px' }}>
@@ -387,9 +401,9 @@ export default function CaseStudyPage({ cs }) {
 
         {/* ── 7: Extra images gallery ── */}
         {allImages.length > (cs.outcome2 ? 3 : 2) && (
-          <StickySection zIndex={7} background='var(--c-bg)'>
+          <StickySection zIndex={7} background='var(--c-warm)' flat>
             <div style={{ ...INNER, padding: 'clamp(48px, 6vw, 72px) 32px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${allImages.slice(cs.outcome2 ? 3 : 2).length}, 1fr)`, gap: 24 }}>
+              <div className="md:grid-cols-2" style={{ display: 'grid', gap: 24 }}>
                 {allImages.slice(cs.outcome2 ? 3 : 2).map((img, i) => (
                   <FadeIn key={i} delay={i * 80}>
                     <div style={{ borderRadius: 0, overflow: 'hidden', boxShadow: 'none' }}>

@@ -194,18 +194,17 @@ export default function Nav() {
 
       {/* Mobile menu overlay */}
       <div
-        className="flex md:hidden"
+        className={menuOpen ? 'flex md:hidden' : 'hidden'}
         style={{
           position: 'fixed',
-          inset: 0,
+          top: 0, left: 0, right: 0, bottom: 0,
+          width: '100vw', height: '100dvh',
           zIndex: 90,
           background: '#F5EDE0',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           gap: 48,
-          transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
-          transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
         {[

@@ -222,9 +222,34 @@ body {
   background: rgba(255,255,255,0.5);
 }
 
+/* ── Metric callout — mobile stacking ── */
+@media (max-width: 639px) {
+  .metric-group {
+    width: 100%;
+    border-bottom: 1px solid #D4C9B8;
+    padding-bottom: 28px;
+    margin-bottom: 28px;
+  }
+  .metric-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  .metric-divider { display: none; }
+}
+
+/* ── Meta table TEAM row — mobile ── */
+@media (max-width: 639px) {
+  .meta-team {
+    width: 100%;
+    border-top: 1px solid var(--c-border);
+    padding-top: 12px;
+  }
+}
+
 /* ── Metric band ── */
 .metric-number {
-  font-size: 38px;
+  font-size: clamp(26px, 5vw, 38px);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -245,15 +270,26 @@ body {
   .case-card-layout { flex-direction: row; }
 }
 
+/* Mobile: push text content to top so CTA stays visible while next card scrolls in */
+.case-text-half {
+  justify-content: flex-start;
+}
+@media (min-width: 1024px) {
+  .case-text-half { justify-content: center; }
+}
+
 .case-image-half {
-  flex: 0 0 42%;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  overflow: hidden;
 }
 @media (min-width: 1024px) {
-  .case-image-half { flex: 0 0 50%; }
+  .case-image-half {
+    flex: 0 0 50%;
+    height: 100%;
+  }
 }
 
 .case-mockup-inner {

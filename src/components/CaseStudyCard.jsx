@@ -57,7 +57,7 @@ export default function CaseStudyCard({ cs, index }) {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    objectPosition: 'top left',
+                    objectPosition: 'top center',
                     display: 'block',
                   }}
                   loading="lazy"
@@ -75,7 +75,7 @@ export default function CaseStudyCard({ cs, index }) {
           {/* Text area */}
           <div
             style={{
-              padding: 32,
+              padding: 'clamp(20px, 4vw, 32px)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',

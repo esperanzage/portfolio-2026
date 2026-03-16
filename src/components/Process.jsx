@@ -63,9 +63,9 @@ export default function Process() {
 
         {/* Cards grid */}
         <div
+          className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
             gap: 20,
           }}
         >
@@ -79,7 +79,7 @@ export default function Process() {
                     backgroundBlendMode: 'multiply',
                     border: '1px solid rgba(176, 141, 87, 0.18)',
                     borderRadius: 16,
-                    padding: '32px 28px',
+                    padding: '24px 20px',
                     height: '100%',
                     boxShadow: '0 1px 2px rgba(100,70,20,0.06), inset 0 1px 0 rgba(255,255,255,0.6)',
                   }}
